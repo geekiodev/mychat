@@ -1,0 +1,42 @@
+<ion-view view-title="Rooms">
+    <ion-nav-buttons side="right">
+        <!-- New Task button-->
+        <button class="button button-icon" ng-click="openRoomModal()">
+            <i class="icon ion-compose"></i>
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
+        <ion-list ng-show="rooms">
+            <ion-item class="item-icon-left" ng-repeat="room in rooms" type="item-text-wrap" ng-click="openChatRoom(room.$id)">
+                <i class="icon {{room.icon}}"></i>
+                <h2>{{room.name}}</h2>
+            </ion-item>
+        </ion-list>
+        <ion-list ng-hide="rooms.length">
+            <ion-item class="textCenter">
+                <i class="icon ion-loading-c"></i> Loading Rooms
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
+
+<script id="new-room-modal.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar class="bar-dark">
+            <h1 class="title">Create a new Room</h1>
+            <button class="button button-icon" ng-click="closeRoomModal()">
+                <i class="icon ion-android-close"></i>
+            </button>
+        </ion-header-bar>
+        <ion-content>
+            <form ng-submit="createRoom()">
+                <div class="list list-inset">
+                    <label class="item item-input">
+                        <input ng-model="room.name" type="text" placeholder="Room Name">
+                    </label>
+                    <button type="submit" class="button button-block button-positive">Create Room</button>
+                </div>
+            </form>
+        </ion-content>
+    </ion-modal-view>
+</script>

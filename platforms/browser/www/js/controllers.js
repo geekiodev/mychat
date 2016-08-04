@@ -1,7 +1,14 @@
-angular.module('starter.controllers', [])
+var app = angular.module('starter.controllers', [])
 
-.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope) {
+app.controller('LoginCtrl', function ($scope, $ionicModal, $state, $firebaseAuth, $ionicLoading, $rootScope, $cordovaDevice) {
   console.log('Login Controller Initialized');
+  
+  try {
+        console.log($cordovaDevice.getUUID());
+    } catch (err) {
+        console.log("Error " + err);
+        //alert("error " + err);
+    }
   
   var ref = new Firebase($scope.firebaseUrl);
   var auth = $firebaseAuth(ref);
@@ -66,9 +73,9 @@ angular.module('starter.controllers', [])
       alert("Please enter email and password both");
     }
   }
-})
+});
 
-.controller('ChatCtrl', function ($scope, Chats, $state, $rootScope) {
+app.controller('ChatCtrl', function ($scope, Chats, $state, $rootScope) {
   console.log("Chat Controller initialized");
 
   $scope.IM = {
@@ -98,9 +105,9 @@ angular.module('starter.controllers', [])
   $scope.remove = function (chat) {
       Chats.remove(chat);
   }
-})  
+});  
 
-.controller('EventCtrl', function ($scope, Events, $state, $ionicPlatform, $cordovaCalendar, $timeout) {
+app.controller('EventCtrl', function ($scope, Events, $state, $ionicPlatform, $cordovaCalendar, $timeout) {
   console.log("Event Controller initialized");
   /*
   Events.get().then(function(events) {
@@ -110,8 +117,6 @@ angular.module('starter.controllers', [])
   */
   
   $ionicPlatform.ready(function() {
-    
-  console.log('im here ready');
 		Events.get().then(function(events) {
 			console.log("events", JSON.stringify(events));	
 			$scope.events = events;
@@ -137,9 +142,9 @@ angular.module('starter.controllers', [])
 
 		
 	};
-})  
+});  
 
-.controller('RoomsCtrl', function ($scope, $ionicModal, Rooms, $state) {
+app.controller('RoomsCtrl', function ($scope, $ionicModal, Rooms, $state) {
   
   //configure the ionic modal before use
   $ionicModal.fromTemplateUrl('new-room-modal.html', {

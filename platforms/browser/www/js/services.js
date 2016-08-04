@@ -1,4 +1,4 @@
-angular.module('starter.services', ['firebase'])
+var app = angular.module('starter.services', ['firebase']);
 
 /*
 .factory('Chats', function() {
@@ -50,13 +50,13 @@ angular.module('starter.services', ['firebase'])
   };
 })
 */
-.factory("Auth", ["$firebaseAuth", "$rootScope", function ($firebaseAuth, $rootScope) {
+app.factory("Auth", ["$firebaseAuth", "$rootScope", function ($firebaseAuth, $rootScope) {
     var ref = new Firebase(firebaseUrl);
     return $firebaseAuth(ref);
   }]
-)
+);
 
-.factory('Chats', function ($firebaseArray, Rooms) {
+app.factory('Chats', function ($firebaseArray, Rooms) {
 
     var selectedRoomId;
 
@@ -119,12 +119,12 @@ angular.module('starter.services', ['firebase'])
             }
         }
     }
-})
+});
 
 /**
  * Simple Service which returns Rooms collection as Array from Salesforce & binds to the Scope in Controller
  */
-.factory('Rooms', function ($firebaseArray) {
+app.factory('Rooms', function ($firebaseArray) {
     // Might use a resource here that returns a JSON array
     var ref = new Firebase(firebaseUrl);
     var rooms = $firebaseArray(ref.child('rooms'));
@@ -155,9 +155,9 @@ angular.module('starter.services', ['firebase'])
             }
         }
     }
-})
+});
 
-.factory('Events', function($q, $cordovaCalendar) {
+app.factory('Events', function($q, $cordovaCalendar) {
 
     var incrementDate = function (date, amount) {
         var tmpDate = new Date(date);
